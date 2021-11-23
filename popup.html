@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <title>
+        IS Screen Recorder
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Custom css -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Google icon -->
+    <link href="plugins/Proppeller-Material-Design-Bootstrap/assets/fonts/material-design-icons/iconfont/material-icons.css" rel="stylesheet">
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="plugins/Proppeller-Material-Design-Bootstrap/assets/css/bootstrap.min.css">
+
+    <!-- Propeller css -->
+    <link rel="stylesheet" type="text/css" href="plugins/Proppeller-Material-Design-Bootstrap/assets/css/propeller.min.css">
+    <!-- Propeller tooltip -->
+    <link href="plugins/Proppeller-Material-Design-Bootstrap/components/tooltip/css/tooltip.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="plugins/Proppeller-Material-Design-Bootstrap/assets/css/progress-circular.css">
+	<!-- Propeller textfield -->
+    <link href="plugins/Proppeller-Material-Design-Bootstrap/components/textfield/css/textfield.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <br/>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-xs-12" >
+				<div class="pmd-card pmd-card-default pmd-z-depth" >
+					<div class="pmd-card-title">
+					  <div class="media-left">
+						<a class="avatar-list-img" href="javascript:void(0);">
+							<img src="img/icon.png" width="40" height="40">
+						</a>
+					  </div>
+					  <div class="media-body media-middle">
+						<h3 class="pmd-card-title-text">IS Screen Recorder</h3>
+						<span class="pmd-card-subtitle-text">Developed by wayne</span>
+					  </div>
+					</div>	
+					<div class="pmd-card-body">
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <span id="time-label" style="width: 100%!important;text-align: center!important;display: block;" ></span>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="col-xs-12" >
+                                <div style="float: none!important; margin: 0 50%!important;">
+                                    <button 
+                                        id="start-record"
+                                        class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger" 
+                                        style="margin-left: -30px!important;display: block;" 
+                                        type="button" 
+                                        title="Start Record">
+                                        <i class="material-icons pmd-sm">radio_button_checked</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" >
+                                <div style="float: none!important; margin: 0 50%!important;">
+                                    <button 
+                                        id="stop-record"
+                                        class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" 
+                                        style="color:red!important;margin-left: -30px!important;display: none" 
+                                        type="button" 
+                                        title="Stop Record" 
+                                        style="float: none!important; margin: 0 auto!important;">
+                                        <i class="material-icons pmd-sm" >cancel_presentation</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" >
+                                <p>
+                                    <div id="file-name-form-input" class="form-group pmd-textfield pmd-textfield-floating-label" style="display: none">
+                                        <label for="file-name-error" class="control-label pmd-input-group-label">File name</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="material-icons md-dark pmd-sm">save</i></div>
+                                            <input type="text" class="form-control" id="file-name">
+                                        </div>
+                                        <span class="control-label pmd-input-group-label error-label" style="display: none;">Please enter valid name</label>
+                                    </div>
+                                    <a 
+                                        id="download" 
+                                        disabled="true"
+                                        class="btn btn-primary mb-4 btn-block"
+                                        style="float: none!important; margin: 0 auto!important;display: none">
+                                        <i class="material-icons pmd-sm" >file_download</i>
+                                    </a>
+                                </p>
+                                <p>
+                                    <button 
+                                        id="record-again" 
+                                        class="btn btn-default mb-4 btn-block"
+                                        style="float: none!important; margin: 0 auto!important;display: none">
+                                        <i class="material-icons pmd-sm" >repeat</i>
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</body>
+    <!-- Scripts Starts -->
+    <script src="plugins/Proppeller-Material-Design-Bootstrap/assets/js/jquery-1.12.2.min.js"></script>
+    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="plugins/Proppeller-Material-Design-Bootstrap/assets/js/bootstrap.min.js"></script>
+    <!-- Propeller js -->
+    <script src="plugins/Proppeller-Material-Design-Bootstrap/assets/js/propeller.min.js"></script>
+    <!-- Propeller checkbox js -->
+    <script src="plugins/Proppeller-Material-Design-Bootstrap/components/textfield/js/textfield.js"></script>
+    <!-- Jquery Loading Indicator Initialize -->
+    <!-- <script src="plugins/Proppeller-Material-Design-Bootstrap/assets/js/progress-circular.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+    <script src="js/EBML.js"></script>
+    <script src="js/device.js"></script>
+    <script src="js/popup.js"></script>
+</html>
