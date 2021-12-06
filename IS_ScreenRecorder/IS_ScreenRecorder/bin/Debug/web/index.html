@@ -1,0 +1,657 @@
+<html>
+
+<head>
+    <title>
+        IS Screen Recorder
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Custom css -->
+    <link rel="stylesheet" type="text/css" href="https://erwin-io.github.io/IS_ScreenRecorder/css/style.css">
+    <!-- Google icon -->
+    <link href="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/assets/fonts/material-design-icons/iconfont/material-icons.css" rel="stylesheet">
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/assets/css/bootstrap.min.css">
+    <!-- Propeller css -->
+    <link rel="stylesheet" type="text/css" href="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/assets/css/propeller.min.css">
+    <!-- Propeller tooltip -->
+    <link href="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/components/tooltip/css/tooltip.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/assets/css/progress-circular.css">
+	<!-- Propeller textfield -->
+    <link href="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/components/textfield/css/textfield.css" type="text/css" rel="stylesheet" />
+	<!-- Circular progreess -->
+    <link rel="stylesheet" type="text/css" href="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/assets/css/progress-circular.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://erwin-io.github.io/IS_ScreenRecorder/plugins/sweetalert2/sweetalert2.min.css">
+</head>
+
+<body>
+    <br/>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-xs-12" >
+				<div class="pmd-card pmd-card-default pmd-z-depth" >
+					<div class="pmd-card-title">
+					  <div class="media-left">
+						<a class="avatar-list-img" href="javascript:void(0);">
+							<img src="https://erwin-io.github.io/IS_ScreenRecorder/img/icon.png" width="40" height="40">
+						</a>
+					  </div>
+					  <div class="media-body media-middle">
+						<h3 class="pmd-card-title-text">IS Screen Recorder</h3>
+						<span class="pmd-card-subtitle-text">Developed by wayne</span>
+					  </div>
+					</div>	
+					<div class="pmd-card-body">
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <span id="time-label" style="width: 100%!important;text-align: center!important;display: block;" ></span>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="col-xs-12" >
+                                <div style="float: none!important; margin: 0 50%!important;">
+                                    <button 
+                                        id="start-record"
+                                        class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger" 
+                                        style="margin-left: -30px!important;display: block;" 
+                                        type="button" 
+                                        title="Start Record">
+                                        <i class="material-icons pmd-sm">radio_button_checked</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" >
+                                <div style="float: none!important; margin: 0 50%!important;">
+                                    <button 
+                                        id="stop-record"
+                                        class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" 
+                                        style="color:red!important;margin-left: -30px!important;display: none" 
+                                        type="button" 
+                                        title="Stop Record" 
+                                        style="float: none!important; margin: 0 auto!important;">
+                                        <i class="material-icons pmd-sm" >cancel_presentation</i>
+                                    </button>
+                                </div>
+                            </div>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+                            <div class="col-xs-12" >
+                                <div style="float: none!important; margin: 0 50%!important;">
+                                    <button 
+                                        id="mute-mic"
+                                        class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" 
+                                        style="important;margin-left: -30px!important;display: none" 
+                                        type="button" 
+                                        title="Mute Mic" 
+                                        style="float: none!important; margin: 0 auto!important;">
+                                        <i class="material-icons pmd-sm">mic</i>
+                                    </button>
+                                </div>
+								<br/>
+								<div id="mic-muted-message" class="alert alert-danger" style="display:none;text-align:center" role="alert"><b>Your mic is muted</b></div>
+                            </div>
+							
+                            <div class="col-xs-12" >
+                                <p>
+                                    <div id="file-name-form-input" class="form-group pmd-textfield pmd-textfield-floating-label" style="display: none">
+                                        <label for="file-name-error" class="control-label pmd-input-group-label">File name</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="material-icons md-dark pmd-sm">save</i></div>
+                                            <input type="text" class="form-control" id="file-name">
+                                        </div>
+                                        <span class="control-label pmd-input-group-label error-label" style="display: none;">Please enter valid name</label>
+                                    </div>
+                                    <a 
+                                        id="download" 
+                                        disabled="true"
+                                        class="btn btn-primary mb-4 btn-block"
+                                        title="Download Screen Record" 
+                                        style="float: none!important; margin: 0 auto!important;display: none">
+                                        <i class="material-icons pmd-sm" >file_download</i>
+                                    </a>
+                                </p>
+                                <p>
+                                    <button 
+                                        id="record-again" 
+                                        class="btn btn-default mb-4 btn-block"
+                                        title="Record again" 
+                                        style="float: none!important; margin: 0 auto!important;display: none">
+                                        <i class="material-icons pmd-sm" >repeat</i>
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade" id="modal-progress-circular" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+		<div class="circular-progress-container">
+			<div class="pure-material-progress">
+				<progress class="pure-material-progress-circular" />
+			</div>
+		</div>             
+	</div>
+</body>
+    <!-- Scripts Starts -->
+    <script src="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/assets/js/jquery-1.12.2.min.js"></script>
+    <script src="https://erwin-io.github.io/IS_ScreenRecorder/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/assets/js/bootstrap.min.js"></script>
+    <!-- Propeller js -->
+    <script src="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/assets/js/propeller.min.js"></script>
+    <!-- Propeller checkbox js -->
+    <script src="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/components/textfield/js/textfield.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://erwin-io.github.io/IS_ScreenRecorder/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Jquery Loading Indicator -->
+    <script src="https://erwin-io.github.io/IS_ScreenRecorder/plugins/jquery.loading-indicator/jquery.loading-indicator.min.js"></script>
+	<!-- Circular progreess -->
+    <script src="https://erwin-io.github.io/IS_ScreenRecorder/plugins/Proppeller-Material-Design-Bootstrap/assets/js/progress-circular.js"></script>
+	<!-- EBML -->
+    <script src="https://cdn.webrtc-experiment.com/EBML.js"></script>
+	<!-- SignalR -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.1/jquery.signalR.min.js"></script>
+    <script src="http://localhost:8080/signalr/hubs"></script>
+    <script>
+	
+	
+	
+	var pathNameArray = window.location.pathname.split('/');
+	if((pathNameArray.indexOf("home") > -1) && (pathNameArray.indexOf("recorder") > -1)){
+		document.title = 'IS Screen Recorder';
+	}
+	if((pathNameArray.indexOf("home") > -1) && (pathNameArray.indexOf("startrecord") > -1)){
+		document.title = 'Start Record | IS Screen Recorder';
+	}
+	
+	//Set the hubs URL for the connection
+	$.connection.hub.url = "http://localhost:8080/signalr";
+	
+	// Declare a proxy to reference the hub.
+	var chat = $.connection.MicrophoneHub;
+	
+	// Create a function that the hub can call to broadcast messages.
+	chat.client.receivedMicrophoneStatus = function (status){
+		isMicMute = status === "1" ? false : true;
+		if(isMicMute){
+			muteMicButton.find('.material-icons').text("mic_off");//set mute icon
+			$("#mic-muted-message").show();
+		}
+		else{
+			muteMicButton.find('.material-icons').text("mic");//set unmute icon
+			$("#mic-muted-message").hide();
+		}
+	}	
+	chat.client.startRecord = function (){
+		recordScreen();
+	}
+	chat.client.stopRecord = function (){
+        shouldStop = true;
+	}
+	$.connection.hub.start();
+	
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+    let timeStart = false;
+
+    let download = {};
+
+    let shouldStop = false;
+    let stopped = false;
+    let downloadFinish = false;
+    let isMicMute = false;
+    let downloadButton = $('#download');
+    let startRecordButton = $('#start-record');
+    let muteMicButton = $('#mute-mic');
+    let stopRecordButton = $('#stop-record');
+    let recordAgainButton = $('#record-again');
+    let timeLabel = $('#time-label');
+    let fileNameFormInput = $('#file-name-form-input');
+	
+	let audioContext;
+	
+	let apiHostURL = "http://localhost:8080/";
+	
+	let apiService = function (){
+        var getMicrophoneStatus = function()
+        {
+            return $.ajax({
+                url: "/microphone/getmicrophonestatus",
+                type: "GET",
+                contentType: "application/json;charset=utf-8"
+            });
+        }
+
+        return {
+            getMicrophoneStatus: getMicrophoneStatus
+        };
+    }
+    
+    var api = new apiService();
+	
+    updateTimeLabel();
+    
+    startRecordButton.show();
+	muteMicButton.show();
+    stopRecordButton.hide();
+    downloadButton.hide();
+    recordAgainButton.hide();
+    timeLabel.hide();
+    fileNameFormInput.hide();
+    
+    if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
+        // Firefox 38+ seems having support of enumerateDevicesx
+        navigator.enumerateDevices = function(callback) {
+            navigator.mediaDevices.enumerateDevices().then(callback);
+        };
+    }
+    
+    var MediaDevices = [];
+    var isHTTPs = location.protocol === 'https:';
+    var canEnumerate = false;
+    
+    if (typeof MediaStreamTrack !== 'undefined' && 'getSources' in MediaStreamTrack) {
+        canEnumerate = true;
+    } else if (navigator.mediaDevices && !!navigator.mediaDevices.enumerateDevices) {
+        canEnumerate = true;
+    }
+    
+    var hasMicrophone = false;
+    var hasSpeakers = false;
+    var hasWebcam = false;
+    
+    var isMicrophoneAlreadyCaptured = false;
+    var isWebcamAlreadyCaptured = false;
+    
+    function checkDeviceSupport(callback) {
+        if (!canEnumerate) {
+            return;
+        }
+    
+        if (!navigator.enumerateDevices && window.MediaStreamTrack && window.MediaStreamTrack.getSources) {
+            navigator.enumerateDevices = window.MediaStreamTrack.getSources.bind(window.MediaStreamTrack);
+        }
+    
+        if (!navigator.enumerateDevices && navigator.enumerateDevices) {
+            navigator.enumerateDevices = navigator.enumerateDevices.bind(navigator);
+        }
+    
+        if (!navigator.enumerateDevices) {
+            if (callback) {
+                callback();
+            }
+            return;
+        }
+    
+        MediaDevices = [];
+        navigator.enumerateDevices(function(devices) {
+            devices.forEach(function(_device) {
+                var device = {};
+                for (var d in _device) {
+                    device[d] = _device[d];
+                }
+    
+                if (device.kind === 'audio') {
+                    device.kind = 'audioinput';
+                }
+    
+                if (device.kind === 'video') {
+                    device.kind = 'videoinput';
+                }
+    
+                var skip;
+                MediaDevices.forEach(function(d) {
+                    if (d.id === device.id && d.kind === device.kind) {
+                        skip = true;
+                    }
+                });
+    
+                if (skip) {
+                    return;
+                }
+    
+                if (!device.deviceId) {
+                    device.deviceId = device.id;
+                }
+    
+                if (!device.id) {
+                    device.id = device.deviceId;
+                }
+    
+                if (!device.label) {
+                    device.label = 'Please invoke getUserMedia once.';
+                    if (!isHTTPs) {
+                        device.label = 'HTTPs is required to get label of this ' + device.kind + ' device.';
+                    }
+                } else {
+                    if (device.kind === 'videoinput' && !isWebcamAlreadyCaptured) {
+                        isWebcamAlreadyCaptured = true;
+                    }
+    
+                    if (device.kind === 'audioinput' && !isMicrophoneAlreadyCaptured) {
+                        isMicrophoneAlreadyCaptured = true;
+                    }
+                }
+    
+                if (device.kind === 'audioinput') {
+                    hasMicrophone = true;
+                }
+    
+                if (device.kind === 'audiooutput') {
+                    hasSpeakers = true;
+                }
+    
+                if (device.kind === 'videoinput') {
+                    hasWebcam = true;
+                }
+    
+                // there is no 'videoouput' in the spec.
+    
+                MediaDevices.push(device);
+            });
+    
+            if (callback) {
+                callback();
+            }
+        });
+    }
+    
+    function getSupporterd(){
+    }
+
+    checkDeviceSupport(getSupporterd);
+
+    function startRecord() {
+        startRecordButton.hide();
+        stopRecordButton.show();
+        downloadButton.hide();
+        recordAgainButton.hide();
+        timeLabel.show();
+        hours = minutes = seconds = 0;
+        updateTimeLabel();
+        timeStart = true;
+    }
+    function stopRecord() {
+        startRecordButton.hide();
+        stopRecordButton.hide();
+        downloadButton.show();
+        fileNameFormInput.show();
+        recordAgainButton.show();
+        downloadButton.removeAttr("disabled");
+        fileNameFormInput.addClass('pmd-textfield-floating-label-completed');
+        timeStart = false;
+        var tracks = window.MediaStreamTrack.getSources;
+        var trackSrources = window.MediaStreamTrack.getSources;
+        console.log(tracks);
+        console.log(trackSrources);
+    }
+    const audioRecordConstraints = {
+        echoCancellation: true
+    }
+	
+	function SetMicrophoneStatus(status){
+		$.ajax({
+				url: "/microphone/setmicrophonestatus",
+				type: "POST",
+				data: {"" : status},
+				success: function (result) {
+					checkMicStatus();
+				},
+				error: function (data) {
+					checkMicStatus();
+				}
+			});
+	}
+	
+	function checkMicStatus(){
+        api.getMicrophoneStatus().done(function (data) {
+            isMicMute = data === "1" ? false : true;
+			if(isMicMute){
+				muteMicButton.find('.material-icons').text("mic_off");//set mute icon
+				$("#mic-muted-message").show();
+			}
+			else{
+				muteMicButton.find('.material-icons').text("mic");//set unmute icon
+				$("#mic-muted-message").hide();
+			}
+        });
+	}
+	checkMicStatus();
+
+    startRecordButton.on('click', function(){
+		recordScreen();
+	});
+    stopRecordButton.on('click', function () {
+		Swal.fire({
+					title: 'Stop Screen Record',
+					text: "Do you want to continue!",
+					type: 'question',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',  
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Yes',
+					allowOutsideClick: true
+				})
+				.then((result) => { 
+					if (result.value) {
+						shouldStop = true;
+					}
+				});
+    });
+    muteMicButton.on('click', function(){
+        api.getMicrophoneStatus().done(function (data) {
+            isMicMute = data === "1" ? false : true;
+			console.log(data);
+			if(isMicMute){
+				SetMicrophoneStatus("1");//set to 1(Unmute)
+			}
+			else{
+				SetMicrophoneStatus("0");//set to 1(Mute the mic);
+			}
+        });
+    });
+    fileNameFormInput.find('#file-name').on('keyup keypress blur change', function(){
+        if(fileNameValid()){
+            download.fileName = fileNameFormInput.find('#file-name').val();
+            downloadButton.attr("href", download.href);
+            downloadButton.attr("download", `${download.fileName}.webm`);
+        }
+    });
+    recordAgainButton.on('click', function () {
+        location.reload();
+    });
+
+    function fileNameValid() {
+        if(fileNameFormInput.find('#file-name').val().length > 0){
+            fileNameFormInput.removeClass( "has-error" );
+            fileNameFormInput.find('.error-label').hide();
+            let value = fileNameFormInput.find('#file-name').val();
+            if (value.match(/^\s*[a-z-._\d,\s]+\s*$/i)) {
+                fileNameFormInput.removeClass( "has-error" );
+                fileNameFormInput.find('.error-label').hide();
+                downloadButton.removeAttr("disabled");
+                return true;
+            } else {
+                fileNameFormInput.find('#file-name').focus();
+                fileNameFormInput.removeClass( "has-error" ).addClass( "has-error" );
+                fileNameFormInput.find('.error-label').show();
+                downloadButton.prop('disabled', true);
+                return false;
+            }
+        }else{
+            fileNameFormInput.removeClass( "has-error" ).addClass( "has-error" );
+            fileNameFormInput.find('.error-label').show();
+            downloadButton.prop('disabled', true);
+            return false;
+        }
+
+    }
+
+    const handleRecord = function ({stream, mimeType}) {
+        startRecord()
+        let recordedChunks = [];
+        stopped = false;
+        let mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = function (e) {
+            if (e.data.size > 0) {
+                recordedChunks.push(e.data);
+            }
+
+            if (shouldStop === true && stopped === false) {
+                mediaRecorder.stop();
+                stopped = true;
+            }
+        };
+
+        mediaRecorder.onstop = function () {
+            const blob = new Blob(recordedChunks, {
+                type: mimeType
+            });
+            recordedChunks = []
+			circleProgress.show(false);
+			getSeekableBlob(blob, saveSeekable);
+        };
+
+        mediaRecorder.start(200);
+    };
+	
+	function saveSeekable(blob){
+        let date = new Date();
+        // let month = d.getMonth()+1;
+        // let day = d.getDate();
+        // let date = d.getFullYear() + '-' +
+        //     ((''+month).length<2 ? '0' : '') + month + '-' +
+        //     ((''+day).length<2 ? '0' : '') + day;
+        let formattedDate = date.getFullYear() + '-' +('0' + (date.getMonth()+1)).slice(-2)+ '-' +  ('0' + date.getDate()).slice(-2) + ' '+date.getHours()+ '-'+('0' + (date.getMinutes())).slice(-2)+ '-'+date.getSeconds();
+        download = {
+            href : URL.createObjectURL(blob),
+            fileName : `recording-${formattedDate}`,
+        };
+        downloadButton.attr("href", download.href);
+        downloadButton.attr("download", `${download.fileName}.webm`);
+        fileNameFormInput.find('#file-name').val(download.fileName);
+        <!-- circleProgress.close(); -->
+        stopRecord();
+	}
+
+    async function recordScreen() {
+        const mimeType = 'video/webm';
+        shouldStop = false;
+        const constraints = {
+            video: {
+                cursor: 'motion'
+            }
+        };
+        if(!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia)) {
+            return window.alert('Screen Record not supported!')
+        }
+        let stream = null;
+        
+        
+        if(hasMicrophone){
+			audioContext = new AudioContext();
+            const audioDestination = audioContext.createMediaStreamDestination();
+            const voiceStream = await navigator.mediaDevices.getUserMedia({ audio: {'echoCancellation': true}, video: false });
+            const userAudio = audioContext.createMediaStreamSource(voiceStream);
+            userAudio.connect(audioDestination);
+            
+            const displayStream = await navigator.mediaDevices.getDisplayMedia({video: {cursor: "motion"}, audio: true});
+
+            if(displayStream.getAudioTracks().length > 0) {
+                const displayAudio = audioContext.createMediaStreamSource(displayStream);
+                displayAudio.connect(audioDestination);
+            }
+    
+            const tracks = [...displayStream.getVideoTracks(), ...audioDestination.stream.getTracks()];
+            stream = new MediaStream(tracks);
+			stream.getVideoTracks()[0].addEventListener('ended', () => {
+				shouldStop = true;
+				$(".swal2-container").click();
+			});
+        }
+        else{
+			audioContext = new AudioContext();
+            const audioDestination = audioContext.createMediaStreamDestination();
+            const displayStream = await navigator.mediaDevices.getDisplayMedia({video: {cursor: "motion"}, audio: true});
+
+            if(displayStream.getAudioTracks().length > 0) {
+                const displayAudio = audioContext.createMediaStreamSource(displayStream);
+                displayAudio.connect(audioDestination);
+            }
+    
+            const tracks = [...displayStream.getVideoTracks(), ...audioDestination.stream.getTracks()];
+            stream = new MediaStream(tracks);
+			stream.getVideoTracks()[0].addEventListener('ended', () => {
+				shouldStop = true;
+				$(".swal2-container").click();
+			});
+        }
+        handleRecord({stream, mimeType});
+        timeStart = true;
+        setInterval(timerChange, 1000);
+
+    }
+
+    //decode data to enable seek and forward when playing webm file
+    function getSeekableBlob(inputBlob, callback) {
+        if (typeof EBML === 'undefined') {
+            throw new Error('Please link: https://cdn.webrtc-experiment.com/EBML.js');
+        }
+        var reader = new EBML.Reader();
+        var decoder = new EBML.Decoder();
+        var tools = EBML.tools;
+        var fileReader = new FileReader();
+        fileReader.onload = function(e) {
+            var ebmlElms = decoder.decode(this.result);
+            ebmlElms.forEach(function(element) {
+                reader.read(element);
+            });
+            reader.stop();
+            var refinedMetadataBuf = tools.makeMetadataSeekable(reader.metadatas, reader.duration, reader.cues);
+            var body = this.result.slice(reader.metadataSize);
+            var newBlob = new Blob([refinedMetadataBuf, body], {
+                type: 'video/webm'
+            });
+            callback(newBlob);
+        };
+        fileReader.readAsArrayBuffer(inputBlob);
+    }
+    function timerChange(){
+        if(timeStart){
+            updateTimeLabel();
+            seconds++;
+            if (seconds == 59) {
+                minutes++;
+                seconds = 0;
+                if (minutes == 59) {
+                    hours++;
+                    minute = 0;
+                }
+            }
+        }
+    }
+    function updateTimeLabel(){
+
+        var timeFormatted = ("0" + hours).slice(-2) + " : " + ("0" + minutes).slice(-2) + " : " + ("0" + seconds).slice(-2);
+        timeLabel.html(`<b>RECORDING</b> <p>${timeFormatted}</p>`);
+    }
+	
+	window.onbeforeunload = function (event) {
+		var message = 'Important: Please click on \'Save\' button to leave this page.';
+		if (typeof event == 'undefined') {
+			event = window.event;
+		}
+		if (event) {
+			event.returnValue = message;
+		}
+		return message;
+	};
+	</script>
+</html>
